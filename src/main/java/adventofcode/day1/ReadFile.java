@@ -15,6 +15,7 @@ public class ReadFile {
             while ((line = br.readLine()) != null) {
                 fileLines.add(line);
             }
+            br.close();
         } catch (IOException er) {
             throw new RuntimeException(er);
         }
