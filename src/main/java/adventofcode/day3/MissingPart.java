@@ -21,19 +21,25 @@ public class MissingPart {
                         if (j < charArray.length - 1 && Character.isDigit(charArray[j + 1])) {
                             answer += parseMultiDigitNumber(lines[i], j + 1);
                         }
-                        if (i > 0 && Character.isDigit(lines[i - 1].charAt(j))) {
+                        if (i > 0 && !Character.isDigit(lines[i - 1].charAt(j))) {
+                            if (j > 0 && Character.isDigit(lines[i - 1].charAt(j - 1))) {
+                                answer += parseMultiDigitNumber(lines[i - 1], j - 1);
+                            }
+                            if (j < charArray.length - 1 && Character.isDigit(lines[i - 1].charAt(j + 1))) {
+                                answer += parseMultiDigitNumber(lines[i - 1], j + 1);
+                            }
+                        } else if (i > 0 && Character.isDigit(lines[i - 1].charAt(j))) {
                             answer += parseMultiDigitNumber(lines[i - 1], j);
-                        } else if (i > 0 && j > 0 && Character.isDigit(lines[i - 1].charAt(j - 1))) {
-                            answer += parseMultiDigitNumber(lines[i - 1], j - 1);
-                        } else if (i > 0 && j < charArray.length - 1 && Character.isDigit(lines[i - 1].charAt(j + 1))) {
-                            answer += parseMultiDigitNumber(lines[i - 1], j + 1);
                         }
-                        if (i < lines.length - 1 && Character.isDigit(lines[i + 1].charAt(j))) {
+                        if (i < lines.length - 1 && !Character.isDigit(lines[i + 1].charAt(j))) {
+                            if (i < lines.length - 1 && j > 0 && Character.isDigit(lines[i + 1].charAt(j - 1))) {
+                                answer += parseMultiDigitNumber(lines[i + 1], j - 1);
+                            }
+                            if (i < lines.length - 1 && j < charArray.length - 1 && Character.isDigit(lines[i + 1].charAt(j + 1))) {
+                                answer += parseMultiDigitNumber(lines[i + 1], j + 1);
+                            }
+                        } else if (i < lines.length - 1 && Character.isDigit(lines[i + 1].charAt(j))) {
                             answer += parseMultiDigitNumber(lines[i + 1], j);
-                        } else if (i < lines.length - 1 && j > 0 && Character.isDigit(lines[i + 1].charAt(j - 1))) {
-                            answer += parseMultiDigitNumber(lines[i + 1], j - 1);
-                        } else if (i < lines.length - 1 && j < charArray.length - 1 && Character.isDigit(lines[i + 1].charAt(j + 1))) {
-                            answer += parseMultiDigitNumber(lines[i + 1], j + 1);
                         }
                     }
                 }
@@ -66,3 +72,4 @@ public class MissingPart {
         return Integer.parseInt(numberBuilder.toString());
     }
 }
+
